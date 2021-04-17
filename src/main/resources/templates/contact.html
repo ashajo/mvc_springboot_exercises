@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Contact Page</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <style>
+        body{
+            padding-top: 100px;
+            padding-bottom: 100px;
+        }
+    </style>
 </head>
 <body>
+<h2>Contact List</h2>
+
+<div >
+    <form method=post" th:action="@{/contact}">
+        <div class="form-group">
+            <label>Message:</label>
+            <input class="form-control"type="text"id="contact"name="contact"placeholder="Enter a contact">
+
+        </div>
+        <input class="btn btn-success" type="submit"value="Submit"/>
+
+    </form>
+    <div th:if="${contacts}">
+        <p> No contacts available</p>
+        </div>
+    <div>
+        <ul class="list-group"th:each="contact:${contacts}"></ul>
+        <li class="list-group item"th:text="${contacts}"></li>
+        <p th:text="${contacts}"></p>
+    </div>
+</div>
+
 
 </body>
 </html>

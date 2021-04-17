@@ -2,47 +2,43 @@ package se.lexicon.mvc_springboot_exercises.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class Home {
-    List<String>StringList;
+    List<String>store=new ArrayList<String>();
+    String contact=null;
 
-    @GetMapping("/index")
-    public String index(){
+    @RequestMapping("/index")
+    public String Index(){
         return "index";
     }
+
+
     @GetMapping("/contact")
-    public String contact(){
+    public String Contact(){
         return "contact";
 
     }
     @PostMapping("/contact")
-    public String contact(@RequestParam(name = "new contact")String newContact, Model model){
-        if(StringList==null){
-            StringList=new ArrayList<>();
+    public String addContact(@RequestParam(value = "contact")String contact, Model model){
+        store.add(contact);
+        return "redirect:/contact";
         }
-        StringList.add(newContact);
-        String Message="newContact added";
-        model.addAttribute("message",Message);
-        return "contct";
-    }
-    @GetMapping("/contactList")
-    public String contactList(Model model){
-        if (StringList==null){
-            StringList=new ArrayList<>();
+        @RequestMapping(value = "/contact/contact",method = RequestMethod.GET)
+        public String Listofcontacts(Model model){
+        model.addAttribute("contacts",store);
+        return "contact";
+        }
 
-        }
-        model.addAttribute("StringList",StringList);
-        return "contactList";
-    }
+
     @GetMapping("/about")
-    public String about(){
+    public String About(){
         return "about";
     }
+
+
 }
