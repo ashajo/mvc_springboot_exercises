@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fever Home</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<form th:action="@{/feverHome}" method="post" th:object="${temperature}">
+    <div class="form-group">
+        <label for="formGroupExampleInput">Whats your body Temperature</label>
+        <input type="text"class="form-control"id="formGroupExampleInput"placeholder="Temp in Celsius"th:field="*{temp}">
+            <button type="button" class="btn btn-primary btn-lg btn-block" th:field="{getTemperature()}">CHECK</button>
+    </div>
+</form>
+</body>
+</html>
